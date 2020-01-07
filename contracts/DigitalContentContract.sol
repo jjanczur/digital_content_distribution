@@ -30,7 +30,7 @@ contract DigitalContentContract {
   constructor(
     address _merchant,
     address _creator,
-    string _dcHash,
+    string memory _dcHash,
     uint256 _creatorCompensation,
     uint256 _currentPrice,
     DappToken _token
@@ -115,7 +115,7 @@ contract DigitalContentContract {
   * @dev Buy the digital content. The content token will be authomatically issued to the buyer's account
   */
   function buy()
-    public
+    public payable
   {
     // Balance needs to be higher or equal than combined balance of Deliverer, Key Authority and Creator
     require(address(this).balance >= creatorCompensation
