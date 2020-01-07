@@ -14,15 +14,14 @@ contract DAContractFactory is Ownable{
         public
     {
       token = new DappToken(_name, _symbol, _decimals);
-      // owner = msg.sender;
-      token.addMinter(owner);
+    //   owner = msg.sender;
+    //   token.addMinter(owner);
     }
 
 
       /**
   * @dev Allows owner to create digital content contract for the merchant
   * @param _merchant Address of a Merchant
-  * @param _owner Address of the Creator
   * @param _dcHash Hash of the digital content
   * @param _creatorCompensation Compensation of the creator
   * @param _currentPrice Address of a merchant
