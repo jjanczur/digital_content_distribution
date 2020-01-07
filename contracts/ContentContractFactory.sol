@@ -4,7 +4,7 @@ import "./DappToken.sol";
 import "./DigitalContentContract.sol";
 import "../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
-contract DAContractFactory is Ownable{
+contract ContentContractFactory is Ownable{
   DappToken public token;
   address[] public deployedContracts;
 
