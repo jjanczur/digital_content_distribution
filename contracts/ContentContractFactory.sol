@@ -21,29 +21,29 @@ contract ContentContractFactory is Ownable{
 
   /**
   * @dev Allows owner to create digital content contract for the merchant
-  * @param _merchant Address of a Merchant
-  * @param _dcHash Hash of the digital content
-  * @param _creatorCompensation Compensation of the creator
-  * @param _currentPrice Address of a merchant
+  * @param merchant Address of a Merchant
+  * @param dcHash Hash of the digital content
+  * @param creatorCompensation Compensation of the creator
+  * @param currentPrice Address of a merchant
   */
-    function deployContentContract(address _merchant,
-        string memory _dcHash,
-        uint256 _creatorCompensation,
-        uint256 _currentPrice) public onlyOwner {
+    function deployContentContract(address merchant,
+        string memory dcHash,
+        uint256 creatorCompensation,
+        uint256 currentPrice) public onlyOwner {
 
-        DigitalContentContract _DCContract = new DigitalContentContract(
-            _merchant,
+        DigitalContentContract contentContract = new DigitalContentContract(
+            merchant,
             owner(),
-            _dcHash,
-            _creatorCompensation,
-            _currentPrice,
+            dcHash,
+            creatorCompensation,
+            currentPrice,
             token);
 
         // Add new contract to an array
-        deployedContracts.push(address(_DCContract));
+        deployedContracts.push(address(contentContract));
 
         // With the creation of the new contract by the owner give this contract a minter role to mint a tokens
-        token.addMinter(address(_DCContract));
+        token.addMinter(address(contentContract));
     }
 
     function getContractsByAddress() public view returns (address[] memory) {

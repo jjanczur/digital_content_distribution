@@ -86,29 +86,17 @@ contract DigitalContentContract {
 
     /**
     * @dev Set a current price of digital content. Can be triggered only by the merchant. Price cannot be lower than creatorCompensation
-    * @param _newPrice New price of the content
+    * @param newPrice New price of the content
     */
-    function setCurrentPrice(uint256 _newPrice)
+    function setCurrentPrice(uint256 newPrice)
         public onlyMerchant
     {
-        require(_newPrice >= creatorCompensation
+        require(newPrice >= creatorCompensation
         .add(delivererCompensation)
         .add(keyAuthorityCompensation),
         "new price cannot be lower than the sum of the involved parties compensation");
 
-        currentPrice = _newPrice;
-    }
-
-        /**
-    * @dev Issue a token and send it to a buyer's address
-    * @param buyer Digital content purchaser
-    */
-    function issueToken(
-        address buyer
-    )
-        internal
-    {
-        token.mint(buyer, 1);
+        currentPrice = newPrice;
     }
 
     /**
@@ -138,7 +126,19 @@ contract DigitalContentContract {
         }
 
         // Issue the token for the buyer
-        issueToken(msg.sender);
+        _issueToken(msg.sender);
+    }
+
+    /**
+    * @dev Issue a token and send it to a buyer's address
+    * @param _buyer Digital content purchaser
+    */
+    function _issueToken(
+        address _buyer
+    )
+        internal
+    {
+        token.mint(_buyer, 1);
     }
 
 }
