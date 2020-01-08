@@ -43,9 +43,7 @@ contract ContentContractFactory is Ownable{
     deployedContracts.push(address(_DCContract));
 
       // With the creation of the new contract by the owner give this contract a minter role to mint a tokens
-      ERC20Mintable _mintableToken = ERC20Mintable(token);
-      _mintableToken.addMinter(address(_DCContract));
-      // _mintableToken.renounceMinter(); // Remove this contract from the minters list
+    token.addMinter(address(_DCContract));
   }
 
   function getContractsByAddress() public view returns (address[] memory) {
