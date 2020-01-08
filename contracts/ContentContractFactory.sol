@@ -11,6 +11,7 @@ contract ContentContractFactory is Ownable{
 
   // With the construction of the factory the digital token contract will be deployed
     constructor(string memory _name, string memory _symbol, uint8 _decimals)
+		Ownable()
         public
     {
         token = new DappToken(_name, _symbol, _decimals);
