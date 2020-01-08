@@ -65,10 +65,10 @@ contract DigitalContentContract {
   }
 
     /**
-  * @dev Set a Key Athority. Can be triggered only by the merchant
-  * @param _keyAuthority address of Key Athority picked by the merchant
+  * @dev Set a Key Authority. Can be triggered only by the merchant
+  * @param _keyAuthority address of Key Authority picked by the merchant
   */
-  function setKeyAthority(address _keyAuthority)
+  function setKeyAuthority(address _keyAuthority)
     public onlyMerchant
   {
     keyAuthority = _keyAuthority;
@@ -112,7 +112,7 @@ contract DigitalContentContract {
   }
 
   /**
-  * @dev Buy the digital content. The content token will be authomatically issued to the buyer's account
+  * @dev Buy the digital content. The content token will be automatically issued to the buyer's account
   */
   function buy()
     public payable
