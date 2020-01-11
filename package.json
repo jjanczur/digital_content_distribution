@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jacek Janczura",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@openzeppelin/test-helpers": "^0.5.4",
     "@openzeppelin/test-environment": "^0.1.1",
