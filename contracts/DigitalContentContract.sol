@@ -23,7 +23,7 @@ contract DigitalContentContract {
 
 
     modifier onlyMerchant {
-        require(msg.sender == merchant, "Only merchant can call ths function");
+        require(msg.sender == merchant, "Only merchant can call this function");
         _;
     }
 
@@ -105,10 +105,8 @@ contract DigitalContentContract {
     function buy()
         public payable
     {
-        // Balance needs to be higher or equal than combined balance of Deliverer, Key Authority and Creator
-        require(address(this).balance >= creatorCompensation
-        .add(delivererCompensation)
-        .add(keyAuthorityCompensation), "Address: insufficient balance");
+        // Balance needs to be higher or equal to the currentPrice
+        require(address(this).balance >= currentPrice, "Address: insufficient balance");
 
         // Compensate transaction participants
         creator.toPayable().sendValue(creatorCompensation);
