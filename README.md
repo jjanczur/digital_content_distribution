@@ -2,10 +2,22 @@
 
 Decentralization of trust in digital content distribution using blockchain.
 
+## Deployment
+
+```shell
+npm install -g truffle
+npm install -g ganache-cli
+npm install
+ganache-cli # Start a blockchian
+truffle compile
+truffle migrate
+truffle test
+```
+
 ## Linting
 
 Lint all smart contracts:
 
-```bash
+```shell
 solhint "contracts/**/*.sol"
 ```
