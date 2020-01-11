@@ -5,16 +5,13 @@ import "../node_modules/openzeppelin-solidity/contracts/token/ERC20/ERC20Mintabl
 
 contract DappToken is ERC20Mintable, ERC20Detailed {
     constructor(string memory _name, string memory _symbol, uint8 _decimals)
-        ERC20Detailed(_name, _symbol, _decimals)
         public
-    {
-
-    }
+        ERC20Detailed(_name, _symbol, _decimals){}
 }
 
 // Deploy
 // truffle(development)> DappToken.deployed().then((t) => { token = t })
-
+// ContentContractFactory.deployed().then((t) => { factory = t })
 // Address
 // truffle(development)> token.address
 
