@@ -19,7 +19,7 @@ contract DigitalContentContract {
     uint256 public keyAuthorityCompensation;
     uint256 public creatorCompensation;
     uint256 public currentPrice;
-    DappToken public token;
+    address public token;
 
 
     modifier onlyMerchant {
@@ -33,7 +33,7 @@ contract DigitalContentContract {
         string memory _dcHash,
         uint256 _creatorCompensation,
         uint256 _currentPrice,
-        DappToken _token
+        address _token
     )
     public {
         merchant = _merchant;
@@ -136,7 +136,8 @@ contract DigitalContentContract {
     )
         internal
     {
-        token.mint(_buyer, 1);
+        DappToken tokenInstance = DappToken(token);
+        tokenInstance.mint(_buyer, 1);
     }
 
 }

@@ -7,14 +7,14 @@ import "../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol";
 contract ContentContractFactory is Ownable{
     address[] public deployedContracts;
 
-    DappToken private _token;
+    address public _token;
 
   // With the construction of the factory the digital token contract will be deployed
     constructor(string memory _name, string memory _symbol, uint8 _decimals)
         public
         Ownable()
     {
-        _token = new DappToken(_name, _symbol, _decimals);
+        _token = address(new DappToken(_name, _symbol, _decimals));
     //   owner = msg.sender;
     //   token.addMinter(owner);
     }
@@ -43,7 +43,8 @@ contract ContentContractFactory is Ownable{
         deployedContracts.push(address(contentContract));
 
         // With the creation of the new contract by the owner give this contract a minter role to mint a tokens
-        _token.addMinter(address(contentContract));
+        DappToken tokenInstance = DappToken(_token);
+        tokenInstance.addMinter(address(contentContract));
 
         return address(contentContract);
     }
@@ -54,7 +55,7 @@ contract ContentContractFactory is Ownable{
 
 
     function tokenAddress() public view returns (address) {
-        return address(_token);
+        return _token;
     }
 
 }
