@@ -7,28 +7,9 @@ const ContentContractFactory = artifacts.require(
   "./ContentContractFactory.sol"
 );
 
-const ether = n => new web3.BigNumber(web3.toWei(n, "ether"));
+const CreatorFactory = artifacts.require("./CreatorFactory.sol");
 
-const duration = {
-  seconds: function(val) {
-    return val;
-  },
-  minutes: function(val) {
-    return val * this.seconds(60);
-  },
-  hours: function(val) {
-    return val * this.minutes(60);
-  },
-  days: function(val) {
-    return val * this.hours(24);
-  },
-  weeks: function(val) {
-    return val * this.days(7);
-  },
-  years: function(val) {
-    return val * this.days(365);
-  }
-};
+
 
 module.exports = async function(deployer, network, accounts) {
   const _name = "Digital Content Token";
@@ -46,10 +27,17 @@ module.exports = async function(deployer, network, accounts) {
   const keyAuthority = accounts[3];
   const keyAuthorityCompensation = 100000; // wei 1e5
 
-  await deployer.deploy(ContentContractFactory, _name, _symbol, _decimals, {
+  await deployer.deploy(CreatorFactory, {
     from: owner
   });
-  const factory = await ContentContractFactory.deployed();
+
+  const creatorFactory = await CreatorFactory.deployed();
+
+  await creatorFactory.deployContentFactory(_name, _symbol, _decimals);
+  
+  const factoryAddressArray = await creatorFactory.getContractsByAddress();
+
+  let factory = await ContentContractFactory.at(factoryAddressArray[0]);
 
   await factory.deployContentContract(
     merchant,
@@ -60,7 +48,7 @@ module.exports = async function(deployer, network, accounts) {
 
   const contractAddressArray = await factory.getContractsByAddress();
 
-  contract = await DigitalContentContract.at(contractAddressArray[0]);
+  let contract = await DigitalContentContract.at(contractAddressArray[0]);
 
   await contract.setDeliverer(deliverer, {
     from: merchant

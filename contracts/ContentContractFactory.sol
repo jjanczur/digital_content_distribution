@@ -10,13 +10,12 @@ contract ContentContractFactory is Ownable{
     DappToken private _token;
 
   // With the construction of the factory the digital token contract will be deployed
-    constructor(string memory _name, string memory _symbol, uint8 _decimals)
+    constructor(string memory _name, string memory _symbol, uint8 _decimals, address owner)
         public
         Ownable()
     {
         _token = new DappToken(_name, _symbol, _decimals);
-    //   owner = msg.sender;
-    //   token.addMinter(owner);
+        _token.addMinter(owner);
     }
 
   /**
