@@ -7,36 +7,21 @@ const ContentContractFactory = artifacts.require(
   "./ContentContractFactory.sol"
 );
 
-const ether = n => new web3.BigNumber(web3.toWei(n, "ether"));
-
-const duration = {
-  seconds: function(val) {
-    return val;
-  },
-  minutes: function(val) {
-    return val * this.seconds(60);
-  },
-  hours: function(val) {
-    return val * this.minutes(60);
-  },
-  days: function(val) {
-    return val * this.hours(24);
-  },
-  weeks: function(val) {
-    return val * this.days(7);
-  },
-  years: function(val) {
-    return val * this.days(365);
-  }
-};
-
 module.exports = async function(deployer, network, accounts) {
-  const _name = "Digital Content Token";
-  const _symbol = "DCT";
+  const _name = "Romeo and Juliet by William Shakespeare";
+  const _symbol = "RJWS";
   const _decimals = 0;
+  ROMEO_AND_JULIET_HASH_SHA256 =
+    "C63A0215532664843CD2C7F7F05AD1C54ECD499AF055668F0C8352AC67A15CDA";
+
+  const _name2 = "Hamlet by William Shakespeare";
+  const _symbol2 = "HWS";
+  const _decimals2 = 0;
+  HAMLET_HASH_SHA256 =
+    "33F63D2C1FCE59B60FE10682F98CA30B72BC06DC54D2EBDE8DCF3D9CF0C2B16B";
+
   const [owner, ...otherAccounts] = accounts;
 
-  const dcHash = "Digital content hash";
   const creatorCompensation = 100000; // wei 1e5
   const currentPrice = 1000000; // wei 1e6
   const merchant = accounts[1];
@@ -46,32 +31,82 @@ module.exports = async function(deployer, network, accounts) {
   const keyAuthority = accounts[3];
   const keyAuthorityCompensation = 100000; // wei 1e5
 
+  // Deploy Romeo & Julia
   await deployer.deploy(ContentContractFactory, _name, _symbol, _decimals, {
     from: owner
   });
-  const factory = await ContentContractFactory.deployed();
+  const romeoFactory = await ContentContractFactory.deployed();
+  console.log(`ROMEO_FACTORY = ${romeoFactory.address}`);
+  console.log(`ROMEO_TOKEN = ${await romeoFactory.tokenAddress()}`);
 
-  await factory.deployContentContract(
+  await romeoFactory.deployContentContract(
     merchant,
-    dcHash,
+    ROMEO_AND_JULIET_HASH_SHA256,
     creatorCompensation,
-    currentPrice
+    currentPrice,
+    {
+      from: owner
+    }
   );
 
-  const contractAddressArray = await factory.getContractsByAddress();
+  const contractAddressArrayRomeo = await romeoFactory.getContractsByAddress();
 
-  contract = await DigitalContentContract.at(contractAddressArray[0]);
+  const romeoContract = await DigitalContentContract.at(
+    contractAddressArrayRomeo[0]
+  );
+  console.log(`ROMEO_CONTRACT = ${romeoContract.address}`);
 
-  await contract.setDeliverer(deliverer, {
+  await romeoContract.setDeliverer(deliverer, {
     from: merchant
   });
-  await contract.setDelivererCompensation(delivererCompensation, {
+  await romeoContract.setDelivererCompensation(delivererCompensation, {
     from: merchant
   });
-  await contract.setKeyAuthority(keyAuthority, {
+  await romeoContract.setKeyAuthority(keyAuthority, {
     from: merchant
   });
-  await contract.setKACompensation(keyAuthorityCompensation, {
+  await romeoContract.setKACompensation(keyAuthorityCompensation, {
     from: merchant
   });
-};;
+
+  // Deploy Hamlet
+
+  await deployer.deploy(ContentContractFactory, _name2, _symbol2, _decimals2, {
+    from: owner
+  });
+  const hamletFactory = await ContentContractFactory.deployed();
+
+  console.log(`HAMLET_FACTORY = ${hamletFactory.address}`);
+  console.log(`HAMLET_TOKEN = ${await hamletFactory.tokenAddress()}`);
+
+  await hamletFactory.deployContentContract(
+    merchant,
+    ROMEO_AND_JULIET_HASH_SHA256,
+    creatorCompensation,
+    currentPrice,
+    {
+      from: owner
+    }
+  );
+
+  const contractAddressArrayHamlet = await hamletFactory.getContractsByAddress();
+
+  const hametContract = await DigitalContentContract.at(
+    contractAddressArrayHamlet[0]
+  );
+
+  await hametContract.setDeliverer(deliverer, {
+    from: merchant
+  });
+  await hametContract.setDelivererCompensation(delivererCompensation, {
+    from: merchant
+  });
+  await hametContract.setKeyAuthority(keyAuthority, {
+    from: merchant
+  });
+  await hametContract.setKACompensation(keyAuthorityCompensation, {
+    from: merchant
+  });
+
+  console.log(`HAMLET_CONTRACT = ${hametContract.address}`);
+};
