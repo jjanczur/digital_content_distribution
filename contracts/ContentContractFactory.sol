@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 import "./DappToken.sol";
-import "./DigitalContentContract.sol";
+import "./SLAContract.sol";
 import "../node_modules/openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract ContentContractFactory is Ownable{
@@ -15,8 +15,6 @@ contract ContentContractFactory is Ownable{
         Ownable()
     {
         _token = new DappToken(_name, _symbol, _decimals);
-    //   owner = msg.sender;
-    //   token.addMinter(owner);
     }
 
   /**
@@ -31,7 +29,7 @@ contract ContentContractFactory is Ownable{
         uint256 creatorCompensation,
         uint256 currentPrice) public onlyOwner returns (address) {
 
-        DigitalContentContract contentContract = new DigitalContentContract(
+        SLAContract contentContract = new SLAContract(
             merchant,
             owner(),
             dcHash,

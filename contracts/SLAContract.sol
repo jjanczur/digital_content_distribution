@@ -5,7 +5,7 @@ import "./DappToken.sol";
 import "../node_modules/openzeppelin-solidity/contracts/utils/Address.sol";
 import "../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
 
-contract DigitalContentContract {
+contract SLAContract {
     using Address for address;
     using Address for address payable;
     using SafeMath for uint256;

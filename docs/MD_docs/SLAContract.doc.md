@@ -1,4 +1,4 @@
-# DigitalContentContract
+# SLAContract
 
 
 ## constructor - read
