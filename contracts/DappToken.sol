@@ -8,13 +8,3 @@ contract DappToken is ERC20Mintable, ERC20Detailed {
         public
         ERC20Detailed(_name, _symbol, _decimals){}
 }
-
-// Deploy
-// truffle(development)> DappToken.deployed().then((t) => { token = t })
-// ContentContractFactory.deployed().then((t) => { factory = t })
-// Address
-// truffle(development)> token.address
-
-// Name and symbol
-// token.name()
-// token.symbol()
