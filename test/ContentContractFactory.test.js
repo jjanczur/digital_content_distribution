@@ -1,6 +1,6 @@
 const ContentContractFactory = artifacts.require("ContentContractFactory");
 const DappToken = artifacts.require("DappToken");
-const DigitalContentContract = artifacts.require("DigitalContentContract");
+const SLAContract = artifacts.require("SLAContract");
 const { shouldBehaveLikeOwnable } = require("./Ownable.behavior");
 
 require("chai").should();
@@ -55,7 +55,7 @@ contract("ContentContractFactory", accounts => {
       const contractAddressArray = await this.factory.getContractsByAddress();
       const contractAddress = contractAddressArray[0];
 
-      const contract = await DigitalContentContract.at(contractAddress);
+      const contract = await SLAContract.at(contractAddress);
 
       contractAddress.should.equal(contract.address);
     });

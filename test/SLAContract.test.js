@@ -1,6 +1,6 @@
 const ContentContractFactory = artifacts.require("ContentContractFactory");
 const DappToken = artifacts.require("DappToken");
-const DigitalContentContract = artifacts.require("DigitalContentContract");
+const SLAContract = artifacts.require("SLAContract");
 
 const { shouldBehaveLikeOwnable } = require("./Ownable.behavior");
 
@@ -17,7 +17,7 @@ require("chai")
   .use(require("chai-as-promised"))
   .should();
 
-contract("ContentContractFactory", accounts => {
+contract("SLAContract", accounts => {
   const _name = "Digital Content Token";
   const _symbol = "DCT";
   const _decimals = 0;
@@ -54,7 +54,7 @@ contract("ContentContractFactory", accounts => {
     );
 
     this.contractAddressArray = await this.factory.getContractsByAddress();
-    this.contract = await DigitalContentContract.at(
+    this.contract = await SLAContract.at(
       this.contractAddressArray[0]
     );
 

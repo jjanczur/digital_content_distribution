@@ -1,7 +1,7 @@
 const DappToken = artifacts.require("DappToken.sol");
 
-const DigitalContentContract = artifacts.require(
-  "./DigitalContentContract.sol"
+const SLAContract = artifacts.require(
+  "./SLAContract.sol"
 );
 const ContentContractFactory = artifacts.require(
   "./ContentContractFactory.sol"
@@ -51,7 +51,7 @@ module.exports = async function(deployer, network, accounts) {
 
   const contractAddressArrayRomeo = await romeoFactory.getContractsByAddress();
 
-  const romeoContract = await DigitalContentContract.at(
+  const romeoContract = await SLAContract.at(
     contractAddressArrayRomeo[0]
   );
   console.log(`ROMEO_CONTRACT = ${romeoContract.address}`);
@@ -91,7 +91,7 @@ module.exports = async function(deployer, network, accounts) {
 
   const contractAddressArrayHamlet = await hamletFactory.getContractsByAddress();
 
-  const hametContract = await DigitalContentContract.at(
+  const hametContract = await SLAContract.at(
     contractAddressArrayHamlet[0]
   );
 
