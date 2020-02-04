@@ -256,7 +256,7 @@
 <g id="node12" class="node">
 <title>10</title>
 <polygon fill="#f2f2f2" stroke="#000000" points="97.3474,-229.5 97.3474,-639.9 940.6522,-639.9 940.6522,-229.5 97.3474,-229.5"/>
-<text text-anchor="middle" x="518.9998" y="-623.3" font-family="Times,serif" font-size="14.00" fill="#000000">DigitalContentContract</text>
+<text text-anchor="middle" x="518.9998" y="-623.3" font-family="Times,serif" font-size="14.00" fill="#000000">SLAContract</text>
 <polyline fill="none" stroke="#000000" points="97.3474,-615.1 940.6522,-615.1 "/>
 <text text-anchor="start" x="105.3474" y="-598.5" font-family="Times,serif" font-size="14.00" fill="#000000">Public:</text>
 <text text-anchor="start" x="105.3474" y="-581.7" font-family="Times,serif" font-size="14.00" fill="#000000"> &#160;&#160;merchant: address</text>
