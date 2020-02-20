@@ -2,6 +2,8 @@
 
 Decentralization of trust in digital content distribution using blockchain.
 
+https://www.youtube.com/watch?v=B4-gsvnvECI
+
 ## Deployment
 
 ```shell
